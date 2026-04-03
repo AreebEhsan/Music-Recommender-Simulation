@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python -m src.main)"
+      "Bash(python -m src.main)",
+      "Bash(python -m pytest tests/test_recommender.py -v)"
     ]
   }
 }

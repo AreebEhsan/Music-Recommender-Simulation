@@ -37,13 +37,28 @@ class Recommender:
     def __init__(self, songs: List[Song]):
         self.songs = songs
 
+    def _score(self, user: UserProfile, song: Song) -> float:
+        score = 0.0
+        if song.genre == user.favorite_genre:
+            score += 2.0
+        if song.mood == user.favorite_mood:
+            score += 1.0
+        score += max(0.0, 1.0 - abs(song.energy - user.target_energy))
+        return score
+
     def recommend(self, user: UserProfile, k: int = 5) -> List[Song]:
-        # TODO: Implement recommendation logic
-        return self.songs[:k]
+        ranked = sorted(self.songs, key=lambda s: self._score(user, s), reverse=True)
+        return ranked[:k]
 
     def explain_recommendation(self, user: UserProfile, song: Song) -> str:
-        # TODO: Implement explanation logic
-        return "Explanation placeholder"
+        parts = []
+        if song.genre == user.favorite_genre:
+            parts.append("genre match (+2.0)")
+        if song.mood == user.favorite_mood:
+            parts.append("mood match (+1.0)")
+        energy_score = max(0.0, 1.0 - abs(song.energy - user.target_energy))
+        parts.append(f"energy close (+{energy_score:.2f})")
+        return ", ".join(parts)
 
 def load_songs(csv_path: str) -> List[Dict]:
     """
