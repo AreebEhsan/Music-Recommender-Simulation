@@ -1,0 +1,18 @@
+[2026-04-27 00:24:21] INFO     test — smoke test
+[2026-04-27 00:33:26] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-27 00:33:31] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-27 00:33:31] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-27 00:33:32] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-27 00:33:32] DEBUG    retriever — retrieve: query='upbeat pop workout' top_k=3 best_score=0.587
+[2026-04-27 00:33:32] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-27 00:33:33] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-27 00:33:33] DEBUG    retriever — retrieve: query='upbeat pop workout' top_k=3 best_score=0.587
+[2026-04-27 00:33:33] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-27 00:33:34] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-27 00:33:34] DEBUG    retriever — retrieve: query='music' top_k=5 best_score=0.484
+[2026-04-27 00:33:34] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-27 00:33:35] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-27 00:33:35] DEBUG    retriever — retrieve: query='upbeat energetic workout pop high energy' top_k=2 best_score=0.606
+[2026-04-27 00:33:35] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-27 00:33:36] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-27 00:33:36] DEBUG    retriever — retrieve: query='calm relaxing ambient chill low energy study' top_k=2 best_score=0.309

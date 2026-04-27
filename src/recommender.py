@@ -85,40 +85,68 @@ def load_songs(csv_path: str) -> List[Dict]:
             })
     return songs
 
-def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, str]:
+def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, float, str]:
     """
     Scores a single song against a user preference dict.
-    Returns (total_score, explanation_string).
+    Returns (total_score, confidence_pct, explanation_string).
+
+    Scoring breakdown (max 4.0):
+      +2.0  genre match
+      +1.0  mood match
+      +0–1  energy closeness: max(0, 1 - |song_energy - target_energy|)
+
+    confidence_pct = round(score / 4.0 * 100, 1)
     """
     score = 0.0
     parts = []
 
-    if song["genre"] == user_prefs.get("genre"):
-        score += 2.0
-        parts.append("genre match (+2.0)")
-
-    if song["mood"] == user_prefs.get("mood"):
-        score += 1.0
-        parts.append("mood match (+1.0)")
-
+    pref_genre = user_prefs.get("genre", "")
+    pref_mood = user_prefs.get("mood", "")
     target_energy = float(user_prefs.get("energy", 0.0))
-    energy_score = max(0.0, 1.0 - abs(song["energy"] - target_energy))
+
+    if song["genre"] == pref_genre:
+        score += 2.0
+        parts.append(f"Your preferred genre ({pref_genre}) matches exactly")
+    else:
+        parts.append(f"Genre is {song['genre']} (you prefer {pref_genre})")
+
+    if song["mood"] == pref_mood:
+        score += 1.0
+        parts.append(f"mood ({pref_mood}) aligns")
+    else:
+        parts.append(f"mood is {song['mood']} (you prefer {pref_mood})")
+
+    energy_diff = abs(song["energy"] - target_energy)
+    energy_score = max(0.0, 1.0 - energy_diff)
     score += energy_score
-    parts.append(f"energy close (+{energy_score:.2f})")
 
-    explanation = ", ".join(parts)
-    return score, explanation
+    if energy_diff <= 0.05:
+        parts.append(
+            f"energy ({song['energy']}) is nearly identical to your target ({target_energy})"
+        )
+    elif energy_diff <= 0.20:
+        parts.append(
+            f"energy ({song['energy']}) is close to your target ({target_energy})"
+        )
+    else:
+        parts.append(
+            f"energy ({song['energy']}) differs from your target ({target_energy})"
+        )
+
+    explanation = "; ".join(parts) + "."
+    confidence_pct = round((score / 4.0) * 100, 1)
+    return score, confidence_pct, explanation
 
 
-def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tuple[Dict, float, str]]:
+def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tuple[Dict, float, float, str]]:
     """
     Functional implementation of the recommendation logic.
-    Required by src/main.py
+    Returns a list of (song, score, confidence_pct, explanation) tuples, sorted by score.
     """
     scored = []
     for song in songs:
-        score, explanation = score_song(user_prefs, song)
-        scored.append((song, score, explanation))
+        score, confidence_pct, explanation = score_song(user_prefs, song)
+        scored.append((song, score, confidence_pct, explanation))
 
     scored.sort(key=lambda x: x[1], reverse=True)
     return scored[:k]

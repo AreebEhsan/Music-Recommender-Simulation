@@ -9,3 +9,11 @@ id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
 9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
 10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+11,Block Party,Crate Kings,hip-hop,happy,0.85,95,0.78,0.91,0.12
+12,Street Cipher,Crate Kings,hip-hop,intense,0.88,102,0.55,0.87,0.08
+13,Moonlit Sonata,Clara Voss,classical,relaxed,0.22,72,0.74,0.28,0.97
+14,Pulse Grid,Synthex,electronic,focused,0.80,128,0.52,0.85,0.04
+15,Neon Rainfall,Synthex,electronic,moody,0.71,122,0.43,0.78,0.09
+16,Ember Waltz,Clara Voss,classical,chill,0.18,58,0.80,0.31,0.98
+17,Iron Curtain,Voltline,rock,intense,0.88,144,0.41,0.62,0.07
+18,Golden Hour,Indigo Parade,indie pop,happy,0.69,116,0.86,0.77,0.42
