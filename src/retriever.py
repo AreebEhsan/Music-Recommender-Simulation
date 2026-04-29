@@ -121,3 +121,17 @@ class SongRetriever:
             f"best_score={results[0][1]:.3f}"
         )
         return results
+
+
+# ── Index inspection helper ───────────────────────────────────────────────────
+
+def preview_index_documents(songs: List[Dict], limit: int = 3) -> List[str]:
+    """Return the first *limit* generated document strings without building the index.
+
+    Useful for showing users exactly what text is embedded for each song.
+
+    Example::
+        docs = preview_index_documents(songs, limit=1)
+        print(docs[0])
+    """
+    return [build_song_document(s) for s in songs[:limit]]

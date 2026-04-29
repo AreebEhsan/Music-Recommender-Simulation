@@ -1,7 +1,7 @@
 # AI Music Recommender System
 ### CodePath AI110 — Project 4: Applied AI System
 
-A rule-based music recommender extended with RAG retrieval, Gemini-powered explanations, a Streamlit frontend, and an offline evaluation harness. Built incrementally from the Project 3 foundation.
+A rule-based music recommender extended with an **observable agentic workflow**, RAG retrieval, Gemini-powered explanations, **specialized explanation styles**, a Streamlit frontend, and an offline evaluation harness. Built incrementally from the Project 3 foundation.
 
 ---
 
@@ -20,9 +20,38 @@ The original system (Project 3) was a pure rule-based CLI recommender. Given a u
 
 ## Project 4 Extensions
 
-Project 4 added four significant capabilities on top of the working Project 3 base without changing the core scoring formula.
+Project 4 added six significant capabilities on top of the working Project 3 base without changing the core scoring formula.
 
-### 1. RAG Retrieval (FAISS + sentence-transformers)
+### 1. Observable Agentic Workflow
+
+`src/agent.py` wraps the full pipeline in five labelled, human-readable steps that are visible in the UI as an **Agent Trace**:
+
+| Step | What it does |
+|---|---|
+| **PLAN** | Decides whether to use RAG (natural language query present) or score the full catalog directly |
+| **RETRIEVE** | Runs FAISS semantic search and returns candidates with similarity scores, or passes the full catalog |
+| **SCORE** | Calls the rule-based engine and selects the top-k results |
+| **EXPLAIN** | Generates explanations via Gemini (or deterministic fallback) in the selected style |
+| **REFLECT** | Checks top confidence against a 50% threshold and emits warnings for weak matches |
+
+The agent returns a structured dict — `steps`, `recommendations`, `explanations`, `rag_candidates`, `sim_lookup`, `warnings` — that the Streamlit UI renders directly.
+
+### 2. Specialized Explanation Styles
+
+`src/explainer.py` supports two **explanation styles** selectable from the sidebar:
+
+- **Standard** — factual, attribute-by-attribute breakdown (*"Your preferred genre (pop) matches exactly; energy (0.82) is nearly identical to your target (0.85)."*)
+- **Music Coach** — short, casual, vibe-focused sentence (*"Vibe check (99% match) — Your preferred genre (pop) matches exactly."*)
+
+Both styles work with and without a Gemini API key. The style is forwarded through `run_recommendation_agent()` → `explain_recommendations()` so the full pipeline respects the user's choice.
+
+`src/style_evaluator.py` provides a standalone comparison script:
+
+```bash
+python -m src.style_evaluator
+```
+
+### 3. RAG Retrieval (FAISS + sentence-transformers)
 
 The system can now accept a **natural language query** such as *"something upbeat and energetic for a morning workout"* instead of — or alongside — the structured genre/mood/energy inputs.
 
@@ -40,11 +69,15 @@ After scoring, the top recommendations are sent to the Gemini API (`gemini-1.5-f
 
 If `GEMINI_API_KEY` is not set, the system falls back to the rule-based explanation string automatically — the app never breaks.
 
-### 3. Streamlit Frontend
+### 4. Streamlit Frontend
 
-A browser-based UI (`src/app.py`) replaces the terminal output. Users select genre, mood, energy, and the number of recommendations using dropdowns and sliders, optionally add a natural language query, and toggle Gemini explanations on or off. Results show each song's confidence %, Gemini explanation, and a collapsible scoring breakdown.
+A browser-based UI (`src/app.py`) with sidebar controls and main area results. Every recommendation card shows five metrics (Genre, Mood, Energy, Confidence %, Similarity %) and the selected explanation style. The app includes three expanders:
 
-### 4. Evaluation Harness
+- **Agent Trace** — shows all five PLAN→RETRIEVE→SCORE→EXPLAIN→REFLECT steps with icons
+- **RAG Retrieved Candidates** — lists the FAISS-retrieved songs before scoring (only shown when RAG is active)
+- **View Indexed Song Document Example** — shows how songs are represented as text before embedding
+
+### 6. Evaluation Harness
 
 `src/evaluator.py` defines four predefined user profiles and checks that the top result for each meets a genre match and minimum confidence threshold. It runs fully offline with no API calls and exits with a non-zero code if any case fails, making it CI-compatible.
 
@@ -62,40 +95,45 @@ User Input (Streamlit or CLI)
    Log warnings if corrected
          |
          v
-  [Catalog Loader]
-  Read data/songs.csv → 18 song dicts
-         |
-    NL query?
-    Yes |      | No
-        v      v
-  [FAISS     [Full
-  Retriever]  Catalog]
-    Embed query
-    Search index
-    Return top candidates
-        |      |
-        +------+
-         |
-         v
-   [Scoring Engine]
-   score = genre_match(+2.0)
-         + mood_match(+1.0)
-         + energy_closeness(0–1.0)
-   confidence_pct = score / 4.0 * 100
-         |
-         v
-  [Gemini Explainer]
-  Build prompt from song metadata
-  Call gemini-1.5-flash
-  Parse numbered response
-  (fallback to rule-based text if key absent)
+   ┌─────────────────────────────────┐
+   │   AGENT (src/agent.py)          │
+   │                                 │
+   │  PLAN                           │
+   │  Decide RAG vs. full catalog    │
+   │         |                       │
+   │  RETRIEVE                       │
+   │    NL query?                    │
+   │    Yes |      | No              │
+   │        v      v                 │
+   │  [FAISS     [Full               │
+   │  Retriever]  Catalog]           │
+   │    Embed → search → candidates  │
+   │        |      |                 │
+   │        +------+                 │
+   │         |                       │
+   │  SCORE                          │
+   │  score = genre_match(+2.0)      │
+   │        + mood_match(+1.0)       │
+   │        + energy_closeness(0–1)  │
+   │  confidence_pct = score/4.0*100 │
+   │         |                       │
+   │  EXPLAIN                        │
+   │  Gemini (standard/music_coach)  │
+   │  or deterministic fallback      │
+   │         |                       │
+   │  REFLECT                        │
+   │  Check top confidence vs 50%    │
+   │  Emit warnings if weak match    │
+   └─────────────────────────────────┘
          |
          v
      [Output]
   Title · Artist
-  Genre | Mood | Energy | Confidence %
-  Gemini explanation
-  ▸ Scoring breakdown (expander)
+  Genre | Mood | Energy | Confidence % | Similarity %
+  Explanation (selected style)
+  ▸ Agent Trace expander
+  ▸ RAG Candidates expander (if RAG active)
+  ▸ Index Document Example expander
          |
          v
      [Logger]
@@ -157,7 +195,13 @@ python -m src.main
 python -m src.evaluator
 ```
 
-### 7. Run all tests
+### 7. Run the style comparison script
+
+```bash
+python -m src.style_evaluator
+```
+
+### 8. Run all tests
 
 ```bash
 pytest
@@ -211,7 +255,7 @@ Result:             4/4 cases passed
 Average confidence: 99.6%
 ```
 
-All 23 automated tests also pass (`pytest`).
+All 46 automated tests pass (`pytest`).
 
 ---
 
@@ -236,23 +280,27 @@ The rule-based scoring formula is transparent and deterministic — you can read
 ```
 Music-Recommender-Simulation/
 ├── data/
-│   └── songs.csv              # 18-song catalog
+│   └── songs.csv                  # 18-song catalog
 ├── src/
-│   ├── main.py                # CLI runner (3 hardcoded profiles)
-│   ├── app.py                 # Streamlit frontend
-│   ├── recommender.py         # Scoring engine + load_songs()
-│   ├── retriever.py           # FAISS RAG retriever
-│   ├── explainer.py           # Gemini explanation layer
-│   ├── guardrails.py          # Input validation
-│   ├── logger_config.py       # Logging setup
-│   └── evaluator.py           # Offline evaluation harness
+│   ├── main.py                    # CLI runner (3 hardcoded profiles)
+│   ├── app.py                     # Streamlit frontend (sidebar + agent integration)
+│   ├── agent.py                   # Observable 5-step agentic workflow
+│   ├── recommender.py             # Scoring engine + load_songs()
+│   ├── retriever.py               # FAISS RAG retriever + preview_index_documents()
+│   ├── explainer.py               # Gemini explainer with style support
+│   ├── style_evaluator.py         # Side-by-side style comparison script
+│   ├── guardrails.py              # Input validation
+│   ├── logger_config.py           # Logging setup
+│   └── evaluator.py               # Offline evaluation harness
 ├── tests/
-│   ├── test_recommender.py    # 2 tests (scoring + OOP path)
-│   ├── test_retriever.py      # 9 tests (FAISS + embeddings)
-│   └── test_explainer.py      # 12 tests (fallback + prompt + parser)
+│   ├── test_recommender.py        # 2 tests (scoring + OOP path)
+│   ├── test_retriever.py          # 9 tests (FAISS + embeddings)
+│   ├── test_explainer.py          # 12 tests (fallback + prompt + parser)
+│   ├── test_agent.py              # 14 tests (agentic workflow)
+│   └── test_style_evaluator.py    # 9 tests (explanation styles)
 ├── logs/
-│   └── recommender.log        # Generated at runtime
-├── .env.example               # API key template
+│   └── recommender.log            # Generated at runtime
+├── .env.example                   # API key template
 ├── requirements.txt
 ├── README.md
 ├── model_card.md

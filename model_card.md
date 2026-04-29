@@ -40,21 +40,23 @@
 
 ## 3. How It Works
 
-The system runs a three-stage pipeline on every request.
+The system runs a five-step agentic pipeline on every request (`src/agent.py`). Each step is labelled, logged, and surfaced in the Streamlit UI as an **Agent Trace**.
 
-### Stage 1 — Input Validation (Guardrails)
+### Step 1 — PLAN
 
-`src/guardrails.py` checks that genre and mood are non-empty strings and that energy is a float in `[0.0, 1.0]`. Out-of-range energy values are clamped and a warning is logged. Invalid genre or mood raises a `ValueError` that the UI surfaces to the user.
+The agent inspects the user query. If a natural language query is present, it plans a RAG retrieval pass; otherwise it plans to score the full 18-song catalog directly. The plan message is recorded as a human-readable string.
 
-### Stage 2 — Candidate Retrieval
+### Step 2 — RETRIEVE (with Guardrails)
+
+**Input validation** (`src/guardrails.py`): genre and mood must be non-empty strings; energy is clamped to `[0.0, 1.0]` with a logged warning if corrected.
 
 **With a natural language query (RAG path):**
 Each song is converted to a natural language document (e.g., *"Gym Hero by Max Pulse. Genre: pop. Mood: intense. Energy: 0.93 (high)..."*). These documents are embedded using `sentence-transformers/all-MiniLM-L6-v2` and stored in a FAISS `IndexFlatIP` index. The user query is embedded with the same model and the top-k most semantically similar songs are retrieved via cosine similarity. Only the retrieved candidates proceed to scoring.
 
 **Without a natural language query (direct path):**
-All 18 songs are passed directly to the scoring engine. This is identical to the Project 3 behavior.
+All 18 songs are passed directly to the scoring engine.
 
-### Stage 3 — Scoring and Ranking
+### Step 3 — SCORE
 
 `src/recommender.py` scores every candidate using the deterministic formula:
 
@@ -68,14 +70,18 @@ confidence_pct = round(score / 4.0 * 100, 1)
 
 Maximum possible score: **4.0** (100% confidence). Songs are sorted by score descending and the top-k are returned.
 
-### Stage 4 — Explanation Generation
+### Step 4 — EXPLAIN (with Specialized Style)
 
-`src/explainer.py` sends the ranked results to Gemini (`gemini-1.5-flash`) with a prompt that:
-- Lists each song's full metadata and scoring breakdown
-- Instructs Gemini to write 1–2 sentences per song
-- Explicitly forbids inventing facts not present in the data (no Spotify stats, albums, or chart positions)
+`src/explainer.py` supports two explanation styles selectable at runtime:
 
-If `GEMINI_API_KEY` is absent or the API call fails for any reason, the system falls back to the rule-based explanation string generated during scoring.
+- **Standard** — returns the deterministic rule-based breakdown unchanged as fallback, or sends a factual prompt to Gemini requesting an attribute-by-attribute explanation.
+- **Music Coach** — fallback produces `"Vibe check (X% match) — {first clause}."` (short and casual); Gemini prompt asks for a conversational, vibe-focused sentence.
+
+If `GEMINI_API_KEY` is absent or the API call fails, both styles fall back gracefully to their deterministic variants without raising exceptions.
+
+### Step 5 — REFLECT
+
+The agent checks the top result's confidence against a 50% threshold. If the top match is below threshold, a warning is added to the response and surfaced in the UI. This gives users immediate feedback when their preferences don't align well with the available catalog.
 
 ---
 
@@ -88,7 +94,9 @@ If `GEMINI_API_KEY` is absent or the API call fails for any reason, the system f
 | `test_recommender.py` | 2 | Scoring sort order, explanation non-empty |
 | `test_retriever.py` | 9 | Index build, result count, result structure, semantic correctness |
 | `test_explainer.py` | 12 | Fallback correctness, prompt content, response parsing |
-| **Total** | **23** | **All passing, no API key required** |
+| `test_agent.py` | 14 | Step structure, RAG behavior, confidence warnings, style forwarding |
+| `test_style_evaluator.py` | 9 | Style differentiation, vibe language, length comparison |
+| **Total** | **46** | **All passing, no API key required** |
 
 ### Offline evaluation harness
 
@@ -110,6 +118,8 @@ Average confidence: 99.6%
 
 ## 5. Limitations
 
+**Agent steps are sequential, not parallel:** The PLAN→RETRIEVE→SCORE→EXPLAIN→REFLECT pipeline runs synchronously. For 18 songs this is imperceptible, but embedding and Gemini calls would need async/parallel execution at scale.
+
 **Small dataset:** 18 songs is far too few for a real recommender. A single song can dominate an entire genre or mood category, and any profile with a less common genre will get low-confidence fallback results.
 
 **Exact-match genre and mood scoring:** The `+2.0` genre bonus and `+1.0` mood bonus require exact string equality. A user who prefers "indie" will not match songs tagged "indie pop" even though they are related. The RAG retrieval layer partially compensates for this, but the scoring engine still uses exact matching.
@@ -117,6 +127,8 @@ Average confidence: 99.6%
 **No user history or personalization:** Every session starts fresh. The system has no memory of past preferences, play counts, or feedback signals.
 
 **Gemini grounding is prompt-only:** The anti-hallucination rules are enforced through the prompt, not through a technical constraint. Gemini can still occasionally produce text that goes slightly beyond the provided metadata. The fallback explanation is always available and is guaranteed to be grounded in the scoring logic.
+
+**Music Coach style depends on Gemini for full effect:** The deterministic fallback for music_coach style is measurably shorter and more casual than standard, but it is a template transformation, not a genuinely creative rewrite. The full vibe-focused quality only appears when Gemini is active.
 
 **Energy is the only continuous attribute used for scoring:** Tempo, valence, danceability, and acousticness are embedded in the RAG document representation and affect retrieval, but they do not contribute to the rule-based score. This means two songs with identical genre, mood, and energy rank equally regardless of how different they sound in other dimensions.
 

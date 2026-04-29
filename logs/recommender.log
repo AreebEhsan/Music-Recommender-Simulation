@@ -114,3 +114,288 @@
 [2026-04-28 19:12:41] DEBUG    evaluator — Evaluating case: 'intense rock'
 [2026-04-28 19:12:41] DEBUG    evaluator — Evaluating case: 'relaxed acoustic'
 [2026-04-28 19:12:41] INFO     evaluator — All evaluation cases passed.
+[2026-04-29 01:56:00] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:56:00] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:56:00] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:56:00] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:00] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:00] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:56:00] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:56:00] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:56:00] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:56:00] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:00] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:00] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:56:00] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:56:00] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:56:00] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:56:00] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:00] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:00] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:56:00] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:56:00] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:56:00] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:56:00] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:00] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:00] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:56:00] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:56:00] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:56:00] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 2 recommendation(s).
+[2026-04-29 01:56:00] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:00] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:00] INFO     agent — Agent REFLECT: Top confidence is 99.5% — results look strong. All 2 recommendation(s) scored above 50.0%.
+[2026-04-29 01:56:00] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:56:00] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:56:00] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:56:00] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:00] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:00] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:56:00] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:56:00] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:56:00] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:56:00] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:00] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:00] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:56:00] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:56:00] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:56:00] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:56:00] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:00] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:00] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:56:00] INFO     agent — Agent PLAN: RAG enabled: will retrieve 5 candidates from the FAISS semantic index, then re-rank by scoring engine.
+[2026-04-29 01:56:00] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:56:02] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:56:02] DEBUG    retriever — retrieve: query='upbeat pop workout' top_k=5 best_score=0.587
+[2026-04-29 01:56:02] INFO     agent — Agent RETRIEVE: Retrieved 5 candidates via FAISS (best similarity: 58.7%).
+[2026-04-29 01:56:02] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:56:02] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:02] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:02] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:56:02] INFO     agent — Agent PLAN: RAG enabled: will retrieve 5 candidates from the FAISS semantic index, then re-rank by scoring engine.
+[2026-04-29 01:56:02] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:56:03] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:56:03] DEBUG    retriever — retrieve: query='upbeat pop workout' top_k=5 best_score=0.587
+[2026-04-29 01:56:03] INFO     agent — Agent RETRIEVE: Retrieved 5 candidates via FAISS (best similarity: 58.7%).
+[2026-04-29 01:56:03] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:56:03] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:03] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:03] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:56:03] INFO     agent — Agent PLAN: No natural language query provided: scoring all 1 songs directly with the rule-based engine.
+[2026-04-29 01:56:03] INFO     agent — Agent RETRIEVE: Using full catalog: 1 songs as candidates.
+[2026-04-29 01:56:03] INFO     agent — Agent SCORE: Scored 1 candidates. Top result: "Obscure Track" (3.8% confidence). Returning 1 recommendation(s).
+[2026-04-29 01:56:03] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:03] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:03] INFO     agent — Agent REFLECT: Top confidence is 3.8% — below 50.0%. Recommendations may not closely match preferences.
+[2026-04-29 01:56:03] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:56:03] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:56:03] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 1 recommendation(s).
+[2026-04-29 01:56:03] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:03] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:03] INFO     agent — Agent REFLECT: Top confidence is 99.5% — results look strong. All 1 recommendation(s) scored above 50.0%.
+[2026-04-29 01:56:03] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:56:03] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:56:03] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:56:03] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:03] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:03] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:56:03] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:56:03] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:56:03] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 2 recommendation(s).
+[2026-04-29 01:56:03] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:03] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:56:03] INFO     agent — Agent REFLECT: Top confidence is 99.5% — results look strong. All 2 recommendation(s) scored above 50.0%.
+[2026-04-29 01:56:03] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:56:03] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:56:03] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 2 recommendation(s).
+[2026-04-29 01:56:03] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:56:03] INFO     agent — Agent EXPLAIN: Gemini disabled — music_coach fallback explanation used.
+[2026-04-29 01:56:03] INFO     agent — Agent REFLECT: Top confidence is 99.5% — results look strong. All 2 recommendation(s) scored above 50.0%.
+[2026-04-29 01:56:03] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:03] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:03] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:03] WARNING  explainer — GEMINI_API_KEY not set — using fallback explanations. Add your key to a .env file or set it as an environment variable.
+[2026-04-29 01:56:03] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:03] WARNING  explainer — Numbered parse yielded 2 parts, expected 3. Trying blank-line split.
+[2026-04-29 01:56:03] WARNING  explainer — Could not reliably parse Gemini response; using partial results.
+[2026-04-29 01:56:03] WARNING  explainer — Numbered parse yielded 4 parts, expected 3. Trying blank-line split.
+[2026-04-29 01:56:03] WARNING  explainer — Could not reliably parse Gemini response; using partial results.
+[2026-04-29 01:56:03] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:56:04] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:56:04] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:56:05] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:56:05] DEBUG    retriever — retrieve: query='upbeat pop workout' top_k=3 best_score=0.587
+[2026-04-29 01:56:05] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:56:06] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:56:06] DEBUG    retriever — retrieve: query='upbeat pop workout' top_k=3 best_score=0.587
+[2026-04-29 01:56:06] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:56:07] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:56:07] DEBUG    retriever — retrieve: query='music' top_k=5 best_score=0.484
+[2026-04-29 01:56:07] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:56:08] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:56:08] DEBUG    retriever — retrieve: query='upbeat energetic workout pop high energy' top_k=2 best_score=0.606
+[2026-04-29 01:56:08] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:56:09] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:56:09] DEBUG    retriever — retrieve: query='calm relaxing ambient chill low energy study' top_k=2 best_score=0.309
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:56:09] INFO     explainer — Gemini disabled by caller — using nonexistent_style fallback.
+[2026-04-29 01:56:22] INFO     evaluator — Loading catalog from C:\Users\AREEB\Desktop\AI Engineering\Music-Recommender-Simulation\data\songs.csv
+[2026-04-29 01:56:22] INFO     evaluator — Loaded 18 songs — running 4 eval cases
+[2026-04-29 01:56:22] DEBUG    evaluator — Evaluating case: 'upbeat workout'
+[2026-04-29 01:56:22] DEBUG    evaluator — Evaluating case: 'chill study'
+[2026-04-29 01:56:22] DEBUG    evaluator — Evaluating case: 'intense rock'
+[2026-04-29 01:56:22] DEBUG    evaluator — Evaluating case: 'relaxed acoustic'
+[2026-04-29 01:56:22] INFO     evaluator — All evaluation cases passed.
+[2026-04-29 01:58:49] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:58:49] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:58:49] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:58:49] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:49] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:49] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:58:49] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:58:49] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:58:49] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:58:49] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:49] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:49] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:58:49] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:58:49] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:58:49] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:58:49] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:49] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:49] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:58:49] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:58:49] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:58:49] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:58:49] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:49] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:49] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:58:49] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:58:49] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:58:49] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 2 recommendation(s).
+[2026-04-29 01:58:49] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:49] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:49] INFO     agent — Agent REFLECT: Top confidence is 99.5% — results look strong. All 2 recommendation(s) scored above 50.0%.
+[2026-04-29 01:58:49] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:58:49] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:58:49] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:58:49] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:49] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:49] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:58:49] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:58:49] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:58:49] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:58:49] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:49] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:49] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:58:49] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:58:49] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:58:49] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:58:49] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:49] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:49] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:58:49] INFO     agent — Agent PLAN: RAG enabled: will retrieve 5 candidates from the FAISS semantic index, then re-rank by scoring engine.
+[2026-04-29 01:58:49] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:58:51] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:58:51] DEBUG    retriever — retrieve: query='upbeat pop workout' top_k=5 best_score=0.587
+[2026-04-29 01:58:51] INFO     agent — Agent RETRIEVE: Retrieved 5 candidates via FAISS (best similarity: 58.7%).
+[2026-04-29 01:58:51] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:58:51] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:51] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:51] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:58:51] INFO     agent — Agent PLAN: RAG enabled: will retrieve 5 candidates from the FAISS semantic index, then re-rank by scoring engine.
+[2026-04-29 01:58:51] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:58:51] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:58:52] DEBUG    retriever — retrieve: query='upbeat pop workout' top_k=5 best_score=0.587
+[2026-04-29 01:58:52] INFO     agent — Agent RETRIEVE: Retrieved 5 candidates via FAISS (best similarity: 58.7%).
+[2026-04-29 01:58:52] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:58:52] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:52] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:52] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:58:52] INFO     agent — Agent PLAN: No natural language query provided: scoring all 1 songs directly with the rule-based engine.
+[2026-04-29 01:58:52] INFO     agent — Agent RETRIEVE: Using full catalog: 1 songs as candidates.
+[2026-04-29 01:58:52] INFO     agent — Agent SCORE: Scored 1 candidates. Top result: "Obscure Track" (3.8% confidence). Returning 1 recommendation(s).
+[2026-04-29 01:58:52] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:52] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:52] INFO     agent — Agent REFLECT: Top confidence is 3.8% — below 50.0%. Recommendations may not closely match preferences.
+[2026-04-29 01:58:52] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:58:52] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:58:52] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 1 recommendation(s).
+[2026-04-29 01:58:52] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:52] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:52] INFO     agent — Agent REFLECT: Top confidence is 99.5% — results look strong. All 1 recommendation(s) scored above 50.0%.
+[2026-04-29 01:58:52] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:58:52] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:58:52] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 3 recommendation(s).
+[2026-04-29 01:58:52] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:52] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:52] INFO     agent — Agent REFLECT: Top confidence is 99.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 01:58:52] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:58:52] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:58:52] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 2 recommendation(s).
+[2026-04-29 01:58:52] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:52] INFO     agent — Agent EXPLAIN: Gemini disabled — standard fallback explanation used.
+[2026-04-29 01:58:52] INFO     agent — Agent REFLECT: Top confidence is 99.5% — results look strong. All 2 recommendation(s) scored above 50.0%.
+[2026-04-29 01:58:52] INFO     agent — Agent PLAN: No natural language query provided: scoring all 5 songs directly with the rule-based engine.
+[2026-04-29 01:58:52] INFO     agent — Agent RETRIEVE: Using full catalog: 5 songs as candidates.
+[2026-04-29 01:58:52] INFO     agent — Agent SCORE: Scored 5 candidates. Top result: "Sunrise City" (99.5% confidence). Returning 2 recommendation(s).
+[2026-04-29 01:58:52] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:58:52] INFO     agent — Agent EXPLAIN: Gemini disabled — music_coach fallback explanation used.
+[2026-04-29 01:58:52] INFO     agent — Agent REFLECT: Top confidence is 99.5% — results look strong. All 2 recommendation(s) scored above 50.0%.
+[2026-04-29 01:58:52] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:52] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:52] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:52] WARNING  explainer — GEMINI_API_KEY not set — using fallback explanations. Add your key to a .env file or set it as an environment variable.
+[2026-04-29 01:58:52] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:52] WARNING  explainer — Numbered parse yielded 2 parts, expected 3. Trying blank-line split.
+[2026-04-29 01:58:52] WARNING  explainer — Could not reliably parse Gemini response; using partial results.
+[2026-04-29 01:58:52] WARNING  explainer — Numbered parse yielded 4 parts, expected 3. Trying blank-line split.
+[2026-04-29 01:58:52] WARNING  explainer — Could not reliably parse Gemini response; using partial results.
+[2026-04-29 01:58:52] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:58:52] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:58:52] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:58:54] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:58:54] DEBUG    retriever — retrieve: query='upbeat pop workout' top_k=3 best_score=0.587
+[2026-04-29 01:58:54] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:58:55] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:58:55] DEBUG    retriever — retrieve: query='upbeat pop workout' top_k=3 best_score=0.587
+[2026-04-29 01:58:55] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:58:56] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:58:56] DEBUG    retriever — retrieve: query='music' top_k=5 best_score=0.484
+[2026-04-29 01:58:56] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:58:56] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:58:56] DEBUG    retriever — retrieve: query='upbeat energetic workout pop high energy' top_k=2 best_score=0.606
+[2026-04-29 01:58:57] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 01:58:57] INFO     retriever — SongRetriever: indexed 5 songs (embedding dim=384)
+[2026-04-29 01:58:57] DEBUG    retriever — retrieve: query='calm relaxing ambient chill low energy study' top_k=2 best_score=0.309
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using nonexistent_style fallback.
+[2026-04-29 01:59:09] INFO     explainer — Gemini disabled by caller — using standard fallback.
+[2026-04-29 01:59:09] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
