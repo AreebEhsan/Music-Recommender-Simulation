@@ -3,6 +3,10 @@
 
 A rule-based music recommender extended with an **observable agentic workflow**, RAG retrieval, Gemini-powered explanations, **specialized explanation styles**, a Streamlit frontend, and an offline evaluation harness. Built incrementally from the Project 3 foundation.
 
+## 🎥 Demo Video
+
+[Watch Demo](https://drive.google.com/file/d/1iG6v9oQAHJRnlcda7hwoKIHzmpNSBpkP/view?usp=sharing)
+
 ---
 
 ## Project 3 Foundation
