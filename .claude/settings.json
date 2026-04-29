@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(python -m src.main)",
-      "Bash(python -m pytest tests/test_recommender.py -v)"
+      "Bash(python -m pytest tests/test_recommender.py -v)",
+      "Bash(python -m pytest tests/ -q --tb=no)",
+      "Bash(dir README.md model_card.md architecture.md)"
     ]
   }
 }

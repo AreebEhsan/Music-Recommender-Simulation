@@ -9,6 +9,7 @@ if str(_ROOT) not in sys.path:
 
 import streamlit as st
 
+from src.explainer import explain_recommendations
 from src.guardrails import validate_profile
 from src.logger_config import get_logger
 from src.recommender import load_songs, recommend_songs
@@ -46,6 +47,12 @@ with col_right:
 nl_query = st.text_input(
     "Natural Language Query *(optional — enables RAG retrieval)*",
     placeholder="e.g. something upbeat and energetic for a morning workout",
+)
+
+use_gemini = st.checkbox(
+    "Use Gemini explanations",
+    value=True,
+    help="Requires GEMINI_API_KEY in your .env file. Falls back to rule-based text if unavailable.",
 )
 
 st.divider()
@@ -116,6 +123,24 @@ if st.button("Generate Recommendations", type="primary", use_container_width=Tru
         f"top {len(recommendations)} returned"
     )
 
+    # ── Step 5: Gemini explanations ───────────────────────────────────────────
+    with st.spinner("Generating explanations…"):
+        ai_explanations = explain_recommendations(
+            user_query=nl_query.strip(),
+            user_prefs=user_prefs,
+            recommendations=recommendations,
+            use_gemini=use_gemini,
+        )
+
+    import os
+    gemini_key_present = bool(os.environ.get("GEMINI_API_KEY", "").strip())
+    if use_gemini and gemini_key_present:
+        trace.append("✨ Gemini explanation generated successfully")
+    elif use_gemini and not gemini_key_present:
+        trace.append("⚠️ GEMINI_API_KEY not set — fallback rule-based explanation used")
+    else:
+        trace.append("ℹ️ Gemini disabled — fallback rule-based explanation used")
+
     # ── Results ───────────────────────────────────────────────────────────────
     st.subheader("Top Recommendations")
 
@@ -124,9 +149,11 @@ if st.button("Generate Recommendations", type="primary", use_container_width=Tru
     else:
         rag_active = bool(nl_query.strip())
 
-        for rank, (song, score, confidence_pct, explanation) in enumerate(
+        for rank, (song, score, confidence_pct, rule_explanation) in enumerate(
             recommendations, start=1
         ):
+            ai_text = ai_explanations[rank - 1] if rank - 1 < len(ai_explanations) else ""
+
             with st.container():
                 st.markdown(
                     f"**#{rank} — {song['title']}** &nbsp;·&nbsp; *{song['artist']}*"
@@ -138,12 +165,21 @@ if st.button("Generate Recommendations", type="primary", use_container_width=Tru
                 c3.metric("Energy",     f"{song['energy']:.2f}")
                 c4.metric("Confidence", f"{confidence_pct}%")
 
+                # Primary explanation (Gemini or fallback)
+                if ai_text:
+                    st.write(ai_text)
+
+                # Scoring breakdown always available in expander
                 sim_str = (
                     f" | Similarity: {sim_lookup[song['id']]}%"
                     if rag_active and song["id"] in sim_lookup
                     else ""
                 )
-                st.caption(f"Score: {score:.2f} / 4.00{sim_str} — {explanation}")
+                with st.expander("Scoring breakdown"):
+                    st.caption(
+                        f"Score: {score:.2f} / 4.00{sim_str} — {rule_explanation}"
+                    )
+
                 st.divider()
 
     # ── System Trace ──────────────────────────────────────────────────────────
