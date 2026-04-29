@@ -399,3 +399,15 @@
 [2026-04-29 01:58:57] INFO     explainer — Gemini disabled by caller — using nonexistent_style fallback.
 [2026-04-29 01:59:09] INFO     explainer — Gemini disabled by caller — using standard fallback.
 [2026-04-29 01:59:09] INFO     explainer — Gemini disabled by caller — using music_coach fallback.
+[2026-04-29 02:13:09] INFO     app — Input validated: {'genre': 'pop', 'mood': 'intense', 'energy': 0.7}
+[2026-04-29 02:13:09] INFO     app — Loaded 18 songs
+[2026-04-29 02:13:09] INFO     agent — Agent PLAN: RAG enabled: will retrieve 8 candidates from the FAISS semantic index, then re-rank by scoring engine.
+[2026-04-29 02:13:09] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 02:13:10] INFO     retriever — SongRetriever: indexed 18 songs (embedding dim=384)
+[2026-04-29 02:13:10] DEBUG    retriever — retrieve: query='upbeat workout music' top_k=8 best_score=0.726
+[2026-04-29 02:13:10] INFO     agent — Agent RETRIEVE: Retrieved 8 candidates via FAISS (best similarity: 72.6%).
+[2026-04-29 02:13:10] INFO     agent — Agent SCORE: Scored 8 candidates. Top result: "Gym Hero" (94.2% confidence). Returning 5 recommendation(s).
+[2026-04-29 02:13:13] DEBUG    explainer — Sending 'standard' prompt to Gemini (5 songs).
+[2026-04-29 02:13:13] WARNING  explainer — Gemini call failed (NotFound: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.). Using standard fallback.
+[2026-04-29 02:13:13] INFO     agent — Agent EXPLAIN: Gemini (standard style) generated 5 explanation(s).
+[2026-04-29 02:13:13] INFO     agent — Agent REFLECT: Top confidence is 94.2% — strong lead result. Some lower-ranked results have weaker matches.
