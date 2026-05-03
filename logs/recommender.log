@@ -411,3 +411,51 @@
 [2026-04-29 02:13:13] WARNING  explainer — Gemini call failed (NotFound: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.). Using standard fallback.
 [2026-04-29 02:13:13] INFO     agent — Agent EXPLAIN: Gemini (standard style) generated 5 explanation(s).
 [2026-04-29 02:13:13] INFO     agent — Agent REFLECT: Top confidence is 94.2% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 02:41:48] INFO     app — Input validated: {'genre': 'pop', 'mood': 'intense', 'energy': 0.7}
+[2026-04-29 02:41:48] INFO     app — Loaded 18 songs
+[2026-04-29 02:41:48] INFO     agent — Agent PLAN: RAG enabled: will retrieve 8 candidates from the FAISS semantic index, then re-rank by scoring engine.
+[2026-04-29 02:41:48] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 02:41:50] INFO     retriever — SongRetriever: indexed 18 songs (embedding dim=384)
+[2026-04-29 02:41:50] DEBUG    retriever — retrieve: query='upbeat workout music' top_k=8 best_score=0.726
+[2026-04-29 02:41:50] INFO     agent — Agent RETRIEVE: Retrieved 8 candidates via FAISS (best similarity: 72.6%).
+[2026-04-29 02:41:50] INFO     agent — Agent SCORE: Scored 8 candidates. Top result: "Gym Hero" (94.2% confidence). Returning 5 recommendation(s).
+[2026-04-29 02:41:51] DEBUG    explainer — Sending 'standard' prompt to Gemini (5 songs).
+[2026-04-29 02:41:51] WARNING  explainer — Gemini call failed (NotFound: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.). Using standard fallback.
+[2026-04-29 02:41:51] INFO     agent — Agent EXPLAIN: Gemini (standard style) generated 5 explanation(s).
+[2026-04-29 02:41:51] INFO     agent — Agent REFLECT: Top confidence is 94.2% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 02:43:02] INFO     app — Input validated: {'genre': 'synthwave', 'mood': 'chill', 'energy': 0.7}
+[2026-04-29 02:43:02] INFO     app — Loaded 18 songs
+[2026-04-29 02:43:02] INFO     agent — Agent PLAN: RAG enabled: will retrieve 8 candidates from the FAISS semantic index, then re-rank by scoring engine.
+[2026-04-29 02:43:02] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 02:43:03] INFO     retriever — SongRetriever: indexed 18 songs (embedding dim=384)
+[2026-04-29 02:43:03] DEBUG    retriever — retrieve: query='focus study' top_k=8 best_score=0.282
+[2026-04-29 02:43:03] INFO     agent — Agent RETRIEVE: Retrieved 8 candidates via FAISS (best similarity: 28.2%).
+[2026-04-29 02:43:03] INFO     agent — Agent SCORE: Scored 8 candidates. Top result: "Midnight Coding" (43.0% confidence). Returning 5 recommendation(s).
+[2026-04-29 02:43:03] DEBUG    explainer — Sending 'music_coach' prompt to Gemini (5 songs).
+[2026-04-29 02:43:03] WARNING  explainer — Gemini call failed (NotFound: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.). Using music_coach fallback.
+[2026-04-29 02:43:03] INFO     agent — Agent EXPLAIN: Gemini (music_coach style) generated 5 explanation(s).
+[2026-04-29 02:43:03] INFO     agent — Agent REFLECT: Top confidence is 43.0% — below 50.0%. Recommendations may not closely match preferences.
+[2026-04-29 02:43:29] INFO     app — Input validated: {'genre': 'ambient', 'mood': 'relaxed', 'energy': 0.7}
+[2026-04-29 02:43:29] INFO     app — Loaded 18 songs
+[2026-04-29 02:43:29] INFO     agent — Agent PLAN: RAG enabled: will retrieve 8 candidates from the FAISS semantic index, then re-rank by scoring engine.
+[2026-04-29 02:43:29] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 02:43:30] INFO     retriever — SongRetriever: indexed 18 songs (embedding dim=384)
+[2026-04-29 02:43:30] DEBUG    retriever — retrieve: query='workout' top_k=8 best_score=0.414
+[2026-04-29 02:43:30] INFO     agent — Agent RETRIEVE: Retrieved 8 candidates via FAISS (best similarity: 41.4%).
+[2026-04-29 02:43:30] INFO     agent — Agent SCORE: Scored 8 candidates. Top result: "Spacewalk Thoughts" (64.5% confidence). Returning 5 recommendation(s).
+[2026-04-29 02:43:30] DEBUG    explainer — Sending 'standard' prompt to Gemini (5 songs).
+[2026-04-29 02:43:30] WARNING  explainer — Gemini call failed (NotFound: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.). Using standard fallback.
+[2026-04-29 02:43:30] INFO     agent — Agent EXPLAIN: Gemini (standard style) generated 5 explanation(s).
+[2026-04-29 02:43:30] INFO     agent — Agent REFLECT: Top confidence is 64.5% — strong lead result. Some lower-ranked results have weaker matches.
+[2026-04-29 02:44:01] INFO     app — Input validated: {'genre': 'synthwave', 'mood': 'focused', 'energy': 0.35}
+[2026-04-29 02:44:01] INFO     app — Loaded 18 songs
+[2026-04-29 02:44:01] INFO     agent — Agent PLAN: RAG enabled: will retrieve 8 candidates from the FAISS semantic index, then re-rank by scoring engine.
+[2026-04-29 02:44:01] DEBUG    retriever — Loading sentence-transformer model: all-MiniLM-L6-v2
+[2026-04-29 02:44:02] INFO     retriever — SongRetriever: indexed 18 songs (embedding dim=384)
+[2026-04-29 02:44:02] DEBUG    retriever — retrieve: query='focus study' top_k=8 best_score=0.282
+[2026-04-29 02:44:02] INFO     agent — Agent RETRIEVE: Retrieved 8 candidates via FAISS (best similarity: 28.2%).
+[2026-04-29 02:44:02] INFO     agent — Agent SCORE: Scored 8 candidates. Top result: "Focus Flow" (48.8% confidence). Returning 5 recommendation(s).
+[2026-04-29 02:44:02] DEBUG    explainer — Sending 'standard' prompt to Gemini (5 songs).
+[2026-04-29 02:44:02] WARNING  explainer — Gemini call failed (NotFound: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.). Using standard fallback.
+[2026-04-29 02:44:02] INFO     agent — Agent EXPLAIN: Gemini (standard style) generated 5 explanation(s).
+[2026-04-29 02:44:02] INFO     agent — Agent REFLECT: Top confidence is 48.8% — below 50.0%. Recommendations may not closely match preferences.

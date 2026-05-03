@@ -263,15 +263,45 @@ All 46 automated tests pass (`pytest`).
 
 ### Why FAISS instead of a persistent vector database?
 
-FAISS runs entirely in memory and requires no database process, configuration file, or migration. With 18 songs the index builds in under a second on every run. A persistent store (e.g., Chroma) would add setup complexity with no meaningful benefit at this scale.
+FAISS runs entirely in memory and requires no database process, configuration file, or migration. The index is a `faiss.IndexFlatIP` storing 18 × 384 = 6,912 float32 values — roughly 27 KB — and rebuilds in milliseconds on any hardware.
+
+More importantly, `IndexFlatIP` performs **exact** brute-force inner-product search: it checks all 18 vectors on every query with no approximation error. Approximate indexes (HNSW, IVF) exist to trade recall for speed at scales of hundreds of thousands or millions of vectors; at 18 vectors the brute-force baseline is already instantaneous, and adding approximation would only reduce recall. L2-normalizing the vectors before insertion converts the inner product to cosine similarity in [0, 1], which makes the similarity scores directly interpretable as a percentage without a separate normalization step.
+
+A persistent store (Chroma, Qdrant, Pinecone) would add a serialization layer, a background database process, index version management, and the risk of stale vectors if `songs.csv` is updated without re-running ingestion. Those tradeoffs are worthwhile when the index must survive across processes or grow too large for RAM. At this scale, rebuilding from scratch on every run is strictly cheaper and eliminates an entire class of cache-invalidation bugs.
 
 ### Why `all-MiniLM-L6-v2` for embeddings?
 
-It is fast, free, runs offline after the first download, and produces strong semantic embeddings for short English text. Using it for both document indexing and query embedding means no second API key is needed for the retrieval step — Gemini is reserved for the single task it does best: generating readable prose.
+`all-MiniLM-L6-v2` is a 6-layer knowledge-distilled BERT variant that produces 384-dimensional vectors — half the width of the full `all-mpnet-base-v2` model. Smaller vectors mean a smaller FAISS index and faster dot-product math, with only a marginal recall loss on standard STS benchmarks.
+
+The more important property for this use case: the model was fine-tuned on NLI and Semantic Textual Similarity (STS) tasks to pull paraphrases and conceptually related sentences close together in embedding space. That matters here because the query vocabulary (*"energetic workout track"*) and the document vocabulary (*"Genre: pop. Mood: intense. Energy: 0.93 (high)."*) are systematically different — a bag-of-words retriever would miss the connection, but a sentence transformer bridges it.
+
+Using the same model for both document indexing and query embedding is a hard requirement: switching to a different encoder at query time would project the query into a different vector space, making dot-product scores meaningless. By using one model end-to-end, we guarantee the document and query embeddings share the same coordinate system. This design also avoids a second API dependency — Gemini is reserved for the one task it does best (natural-language generation), while all retrieval runs offline after the initial model download.
 
 ### Why use Gemini only for explanations and not for retrieval or scoring?
 
-The rule-based scoring formula is transparent and deterministic — you can read exactly why each song ranked where it did. Replacing scoring with an LLM would make the system a black box and harder to debug. Gemini is only used at the final step to translate the structured scoring breakdown into a sentence a human would naturally say.
+The rule-based formula has three components with bounded, auditable outputs: `genre_match ∈ {0, 2}`, `mood_match ∈ {0, 1}`, `energy_closeness ∈ [0, 1]`. Confidence is `score / 4.0 × 100`. Every number traces directly to a row in `songs.csv` and can be verified by hand. The evaluation harness (`src/evaluator.py`) runs entirely offline and exits with a deterministic pass/fail because the scoring path never touches an external API.
+
+Using Gemini for scoring would introduce three compounding problems. First, LLM outputs are probabilistic — the same query could produce different rankings on different runs, breaking reproducibility. Second, scoring 18 candidates would require either 18 serial API calls or a single batch prompt that returns 18 scores, both of which are slower and harder to parse reliably. Third, LLM-generated scores carry no natural scale: a Gemini score of "7/10" has no interpretable relationship to specific attribute matches the way the formula does.
+
+Gemini's actual role is narrow and grounded: the structured scoring breakdown — produced deterministically by the rule engine — is passed to Gemini as explicit context, and Gemini is asked only to rephrase that breakdown into a fluent sentence. This sharply reduces the risk of hallucination because Gemini is not deciding *what* to say about the song, only *how* to phrase what the rules already established. The LLM stays entirely out of the critical ranking path.
+
+### Why convert songs to natural language descriptions before embedding, rather than embedding raw attribute vectors?
+
+The 18 songs could be represented as raw numeric feature vectors (e.g., genre as a one-hot, energy as a float) and compared with Euclidean distance. That approach breaks down the moment the query is a sentence: there is no meaningful geometric distance between *"something upbeat for a morning workout"* and a feature vector of `[1, 0, 0, 0.93, 118, ...]`.
+
+By converting each song to a sentence like *"Gym Hero by Max Pulse. Genre: pop. Mood: intense. Energy: 0.93 (high). Tempo: 118 BPM. Very danceable. Electronic sound."*, both the query and the catalog exist in the same modality — natural language — and the sentence transformer handles the vocabulary alignment. The descriptive labels (`"high"`, `"very danceable"`, `"melancholic"`) are chosen to match words a user would naturally use in a free-text query. For example, a user query mentioning "acoustic" maps directly to the `"acoustic sound"` label in the document, whereas a raw `acousticness=0.83` float would require the model to learn that numerical proximity implies semantic similarity — something it was not trained to do for arbitrary domain-specific scales.
+
+### Why rebuild the FAISS index on every run rather than persisting it to disk?
+
+FAISS supports `faiss.write_index()` / `faiss.read_index()` for index persistence. The reason not to use it: at 18 songs with a ~27 KB index, the disk I/O to deserialize a saved index is slower than rebuilding from raw embeddings. More critically, a persisted index can silently go stale — if `songs.csv` is updated and the index file is not regenerated, the retriever returns results from the old catalog with no error. Rebuilding every run is a near-zero cost that removes the need to manage index freshness entirely.
+
+At larger catalog sizes (thousands of songs), the calculation inverts: embedding generation becomes the bottleneck (not disk I/O), and a persistent index with an explicit invalidation strategy would be the right design. The current choice is correct for this scale and does not need to be defended as universally correct.
+
+### Why five steps in the agent pipeline, and what does the REFLECT step add?
+
+The five-step structure (PLAN → RETRIEVE → SCORE → EXPLAIN → REFLECT) maps one observable decision per concern: routing, retrieval, ranking, generation, and quality assurance. Each step produces a human-readable message stored in the `steps` list, so the Agent Trace panel in the UI shows exactly what path was taken and why — without requiring a user to read source code or logs.
+
+REFLECT is the step most easily omitted but most valuable for user trust. It checks whether the top result's confidence exceeds 50%, corresponding to a score of at least 2.0 / 4.0 — meaning the song matches at least one major attribute (genre or mood) plus some energy proximity. If the threshold is not met, the system emits an explicit warning before presenting results. This surfaces a real failure mode: a user querying for a niche genre/mood/energy combination that no song in the catalog satisfies well would otherwise receive a low-confidence result presented with the same visual weight as a 99% match. REFLECT converts that silent degradation into an actionable signal.
 
 ---
 
