@@ -3,6 +3,25 @@
 
 A rule-based music recommender extended with an **observable agentic workflow**, RAG retrieval, Gemini-powered explanations, **specialized explanation styles**, a Streamlit frontend, and an offline evaluation harness. Built incrementally from the Project 3 foundation.
 
+**Tech stack:** Python · FAISS · sentence-transformers · Gemini 1.5 Flash · Streamlit · pytest
+
+---
+
+## Table of Contents
+
+- [Demo Video](#-demo-video)
+- [Project 3 Foundation](#project-3-foundation)
+- [Project 4 Extensions](#project-4-extensions)
+- [How the System Works](#how-the-system-works)
+- [Setup Instructions](#setup-instructions)
+- [Example Usage](#example-usage)
+- [Evaluation Results](#evaluation-results)
+- [Design Decisions](#design-decisions)
+- [Limitations](#limitations)
+- [File Structure](#file-structure)
+
+---
+
 ## 🎥 Demo Video
 
 [Watch Demo](https://drive.google.com/file/d/1iG6v9oQAHJRnlcda7hwoKIHzmpNSBpkP/view?usp=sharing)
@@ -67,13 +86,13 @@ When a query is provided:
 
 If no query is given, all 18 songs are scored directly (same behavior as Project 3).
 
-### 2. Gemini Explanation Layer
+### 4. Gemini Explanation Layer
 
 After scoring, the top recommendations are sent to the Gemini API (`gemini-1.5-flash`) along with a structured prompt grounding Gemini strictly in the song metadata. Gemini returns 1–2 sentences per song explaining why it fits the user's preferences in plain English.
 
 If `GEMINI_API_KEY` is not set, the system falls back to the rule-based explanation string automatically — the app never breaks.
 
-### 4. Streamlit Frontend
+### 5. Streamlit Frontend
 
 A browser-based UI (`src/app.py`) with sidebar controls and main area results. Every recommendation card shows five metrics (Genre, Mood, Energy, Confidence %, Similarity %) and the selected explanation style. The app includes three expanders:
 
@@ -306,6 +325,22 @@ At larger catalog sizes (thousands of songs), the calculation inverts: embedding
 The five-step structure (PLAN → RETRIEVE → SCORE → EXPLAIN → REFLECT) maps one observable decision per concern: routing, retrieval, ranking, generation, and quality assurance. Each step produces a human-readable message stored in the `steps` list, so the Agent Trace panel in the UI shows exactly what path was taken and why — without requiring a user to read source code or logs.
 
 REFLECT is the step most easily omitted but most valuable for user trust. It checks whether the top result's confidence exceeds 50%, corresponding to a score of at least 2.0 / 4.0 — meaning the song matches at least one major attribute (genre or mood) plus some energy proximity. If the threshold is not met, the system emits an explicit warning before presenting results. This surfaces a real failure mode: a user querying for a niche genre/mood/energy combination that no song in the catalog satisfies well would otherwise receive a low-confidence result presented with the same visual weight as a 99% match. REFLECT converts that silent degradation into an actionable signal.
+
+---
+
+## Limitations
+
+**Fixed scoring weights.** Genre match is always worth twice a mood match (`2.0` vs `1.0`), regardless of what the user actually cares about. A user who considers mood far more important than genre has no way to express that. Learned or user-specified weights would be a direct improvement.
+
+**Exact-match genre and mood.** Genre and mood comparisons are case-sensitive string equality. A query for `"Hip-Hop"` will score zero against a catalog entry tagged `"hip-hop"`, and there is no synonym mapping — `"energetic"` does not match `"intense"`. This is mitigated in RAG mode (the semantic search tolerates vocabulary mismatches), but the scoring formula still applies exact equality in the final ranking pass.
+
+**18-song catalog.** The catalog is small enough that many genre/mood combinations have zero or one match, making confidence scores on those queries misleading. The evaluation harness tests four well-covered profiles; edge cases (e.g., a jazz/intense combination) may never exceed the 50% REFLECT threshold.
+
+**No user history or feedback loop.** Preferences are stateless — the system has no memory of what a user liked or skipped in a previous session. There is no mechanism to improve recommendations over time without changing the structured inputs.
+
+**Single-language queries only.** The `all-MiniLM-L6-v2` model was trained predominantly on English text. Semantic retrieval quality degrades significantly for queries in other languages, and the song catalog itself is entirely in English.
+
+**Gemini response parsing is fragile.** The explainer splits the API response on a numbered-list regex (`^\d+\.`). If Gemini returns a differently formatted response (e.g., bullet points, or a preamble before the list), the parser falls back to blank-line splitting and may produce misaligned or truncated explanations without raising an error.
 
 ---
 
